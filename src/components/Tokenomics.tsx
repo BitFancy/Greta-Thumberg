@@ -2,7 +2,7 @@
 
 import Chart from 'chart.js/auto';
 import Image from 'next/image';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import {
   FaChartLine,
   FaCoins,
@@ -21,13 +21,13 @@ const Tokenomics = () => {
 
   // Distribution data for pie chart - updated colors for more variety and less green
   // Dark theme colors with black, dark green, and dark purple
-  const distributionData = [
+  const distributionData = useMemo(() => [
     { name: 'Initial Pool', value: 38.2, color: '#1E293B' }, // Dark slate (near black)
     { name: 'Team Allocation', value: 15, color: '#064E3B' }, // Dark green
     { name: 'Reserved for Donations', value: 10, color: '#4C1D95' }, // Dark purple
     { name: 'Future Development', value: 20, color: '#0F766E' }, // Dark teal-green
     { name: 'Community & Airdrops', value: 16.8, color: '#312E81' }, // Dark indigo
-  ];
+  ], []);
 
   const tokenomicsData = [
     {
@@ -125,7 +125,7 @@ const Tokenomics = () => {
         chartInstance.current.destroy();
       }
     };
-  }, []);
+  }, [distributionData]);
 
   return (
     <AnimatedSection id='tokenomics'>
